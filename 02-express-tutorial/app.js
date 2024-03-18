@@ -1,11 +1,35 @@
 const express = require('express');
-const { products } = require('./data')
-
 const app = express();
-app.use(express.static('./public'))
+const { products, people } = require('./data');
+const peopleRouter = require('./routes/people');
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.static('./methods-public'));
+app.use('/api/v1/people', peopleRouter)
+
+const logger = (req, res, next) => {
+    const { method,  url} = req;
+    console.log(method, url, Date())
+    next()
+}
+
+// app.post('/api/v1/people', (req, res) => {
+// 	const { name } = req.body
+// 	if (!name) {
+// 		return res
+// 			.status(400)
+// 			.json({ success: false, message: 'Please provide a name' })
+// 	}
+// 	people.push({ id: people.length + 1, name: name })
+// 	res.status(201).json({ success: true, name: name })
+// });
+
+// app.get('/api/v1/people', (req, res) => {
+// 	res.json(people)
+// });
 
 
-app.get('/api/v1/test', (req, res) => {
+app.get('/api/v1/test', logger, (req, res) => {
     res.json({ message: 'It worked!' })
 });
 
