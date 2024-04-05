@@ -1,0 +1,9 @@
+1. There is a concept in coding called DRY which stands for "do not repeat your self". By creating the "asyncWrapper" middleware, I prevented myself from writing repeated code to handle the functionality of try and catch block by defining an async function.
+2. const getTask = asyncWrapper(async (req, res, next) => {  
+  const { id: taskID } = req.params;  
+  const task = await Task.findOne({ _id: taskID });  
+  if (!task) {  
+    return next(createCustomError(`No task found with the id provided ${taskID}`, 404))
+  }  
+  res.status(200).json({ task });  
+}); 

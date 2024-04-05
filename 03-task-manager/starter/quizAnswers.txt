@@ -1,0 +1,10 @@
+1. If we see from a general scope, express is also a middleware. a middleware has access to request and respond object and we can modify it to give more function to our application. The way middleware work is that it has access to req and res object, once it receives it, if there is anything we want to do with its values, we do our part and then continue the process of our application by using the third middleware parameter which is next().
+2. C = Create, R = Read, U = Update, D = Delete
+3. 
+    1. We do the following:
+        a. Create a .env file and store our data in value and variable format.
+        b. In the file we want to use it, we do this: require('dotenv).config()
+        c. Now we can access the variable:
+        process.env.<variableName>
+    2. We put our .env file in .gitignore file to prevent its publicizing.
+ 
